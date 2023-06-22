@@ -1,8 +1,10 @@
 #include "monty.h"
 stack_t *Store = NULL;
 
-
-void action_add()
+/**
+ * action_add - action
+*/
+void action_add(void)
 {
 	int n1 = remove_first(&Store);
 	int n2 = remove_first(&Store);

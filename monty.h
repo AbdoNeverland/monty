@@ -6,7 +6,6 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -36,6 +35,9 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+extern stack_t *Store;
+void processFile(char *filename);
+int is_number(const char *str);
 char *_strdup(char *str);
 int getlineFromFile(char **line, int *len, int file_descriptor);
 void free_array(char **array);
@@ -44,8 +46,9 @@ stack_t *add2stack(stack_t **head, const int n);
 void processCode(const char *cmd, const char *value, int line_number, char **, FILE *);
 size_t print_stack(const stack_t *h);
 void free_stack(stack_t *head);
-int is_number(const char *str);
 int delete_at_index(stack_t **head, unsigned int index);
 int remove_first(stack_t **head);
 size_t len_store(stack_t *h);
+void raise_error(char **oneline, FILE **f);
+
 #endif
