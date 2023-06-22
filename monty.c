@@ -66,10 +66,8 @@ int is_number(const char *str)
 }
 /**
  * raise_error - raise error
- * @error: error string
  * @oneline: oneline
  * @f: file
- * @line_number: line number
  */
 void raise_error(char **oneline, FILE **f)
 {
@@ -78,6 +76,7 @@ void raise_error(char **oneline, FILE **f)
 		free(*oneline);
 	fclose(*f);
 	free_stack(Store);
+	exit(EXIT_FAILURE);
 }
 /**
  * processCode - process Code
