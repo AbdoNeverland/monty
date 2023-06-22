@@ -1,5 +1,6 @@
 #include "monty.h"
 stack_t *Store = NULL;
+
 /**
  * processFile - process File
  * @filename: filename
@@ -48,14 +49,31 @@ void processFile(char *filename)
 		free(oneline);
 }
 /**
+ * is_number - is number
+ * @str: string
+ * Return: 1 or 0
+*/
+int is_number(char *str)
+{
+	int i;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (!isdigit(str[i]))
+			return (0);
+	}
+	return (1);
+}
+/**
  * processCode - process Code
  * @cmd: command
  * @value: value
  * @line_number: line_number
  * @value: value
+ * @oneline: to free
  */
 void processCode(const char *cmd, const char *value,
-int line_number, char **oneline)
+				 int line_number, char **oneline)
 {
 
 	if (strcmp(cmd, "push") == 0)
@@ -63,7 +81,7 @@ int line_number, char **oneline)
 		int n = atoi(value);
 
 		/*printf("add %d to  stack\n", n);*/
-		if (n == 0)
+		if (!is_number(value) || value[0] == 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			free(*oneline);
