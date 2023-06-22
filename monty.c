@@ -52,7 +52,7 @@ void processFile(char *filename)
  * is_number - is number
  * @str: string
  * Return: 1 or 0
-*/
+ */
 int is_number(const char *str)
 {
 	int i;
@@ -76,8 +76,10 @@ int is_number(const char *str)
 void processCode(const char *cmd, const char *value,
 				 int line_number, char **oneline, FILE *f)
 {
-
-	if (strcmp(cmd, "push") == 0)
+	if (cmd[0] == 0)
+	{
+	}
+	else if (strcmp(cmd, "push") == 0)
 	{
 		int n = atoi(value);
 
@@ -85,8 +87,10 @@ void processCode(const char *cmd, const char *value,
 		if (!is_number(value) || value[0] == 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			free(*oneline);
+			if (*oneline)
+				free(*oneline);
 			fclose(f);
+			free_stack(Store);
 			exit(EXIT_FAILURE);
 		}
 		add2stack(&Store, n);
@@ -99,7 +103,9 @@ void processCode(const char *cmd, const char *value,
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-		free(oneline);
+		if (*oneline)
+			free(*oneline);
+		free_stack(Store);
 		fclose(f);
 		exit(EXIT_FAILURE);
 	}
