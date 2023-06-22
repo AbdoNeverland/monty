@@ -41,6 +41,6 @@ int getlineFromFile(char **line, int *len, int file_descriptor);
 void free_array(char **array);
 char **parse_line(char *str, long int *nb_parts);
 stack_t *add2stack(stack_t **head, const int n);
-void processCode(const char *cmd, const char *value, int line_number, char *);
+void processCode(const char *cmd, const char *value, int line_number, char **);
 size_t print_stack(const stack_t *h);
 #endif

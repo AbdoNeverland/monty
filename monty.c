@@ -51,8 +51,8 @@ void processFile(char *filename)
  * processCode - process Code
  * @cmd: command
  * @value: value
-*/
-void processCode(const char *cmd, const char *value, int line_number, char *oneline)
+ */
+void processCode(const char *cmd, const char *value, int line_number, char **oneline)
 {
 
 	if (strcmp(cmd, "push") == 0)
@@ -63,6 +63,7 @@ void processCode(const char *cmd, const char *value, int line_number, char *onel
 		if (n == 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			free(*oneline);
 			exit(EXIT_FAILURE);
 		}
 		add2stack(&Store, n);
@@ -75,8 +76,8 @@ void processCode(const char *cmd, const char *value, int line_number, char *onel
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-			exit(EXIT_FAILURE);
-
+		free(oneline);
+		exit(EXIT_FAILURE);
 	}
 }
 /**
