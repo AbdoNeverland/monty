@@ -51,8 +51,11 @@ void processFile(char *filename)
  * processCode - process Code
  * @cmd: command
  * @value: value
+ * @line_number: line_number
+ * @value: value
  */
-void processCode(const char *cmd, const char *value, int line_number, char **oneline)
+void processCode(const char *cmd, const char *value,
+int line_number, char **oneline)
 {
 
 	if (strcmp(cmd, "push") == 0)

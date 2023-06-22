@@ -16,10 +16,10 @@ char *_strdup(char *str)
 		size++;
 	array = malloc((1 + size) * sizeof(char));
 	if (!array)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	do {
 		array[i] = str[i];
 	} while (i++ < size);
@@ -33,7 +33,7 @@ char *_strdup(char *str)
  *@len: line lenght
  *@file_descriptor: the file
  * Return: int
-*/
+ */
 int getlineFromFile(char **line, int *len, int file_descriptor)
 {
 	char c[1];
@@ -67,10 +67,10 @@ stack_t *add2stack(stack_t **head, const int n)
 	stack_t *new = malloc(sizeof(stack_t));
 
 	if (!new)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	new->n = n;
 	new->next = *head;
 	new->prev = NULL;
@@ -97,7 +97,7 @@ size_t print_stack(const stack_t *h)
 	return (n);
 }
 /**
- * free_dlistint - free list
+ * free_stack - free list
  * @head: list
  */
 void free_stack(stack_t *head)
