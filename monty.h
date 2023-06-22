@@ -6,8 +6,6 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define print(str) write(STDOUT_FILENO, str, strlen(str))
-#define raise(str) write(STDERR_FILENO, str, strlen(str))
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -43,6 +41,6 @@ int getlineFromFile(char **line, int *len, int file_descriptor);
 void free_array(char **array);
 char **parse_line(char *str, long int *nb_parts);
 stack_t *add2stack(stack_t **head, const int n);
-void processCode(const char *cmd, const char *value);
+void processCode(const char *cmd, const char *value, int line_number);
 size_t print_stack(const stack_t *h);
 #endif

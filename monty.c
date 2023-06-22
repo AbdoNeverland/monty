@@ -16,7 +16,7 @@ void processFile(char *filename)
 	f = fopen(filename, "r");
 	if (!f)
 	{
-		print("file not found\n");
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 
@@ -41,7 +41,7 @@ void processFile(char *filename)
 			if (!oneline[i])
 				break;
 		}
-		processCode(tokens[0], tokens[1]);
+		processCode(tokens[0], tokens[1], line_number);
 	}
 	fclose(f);
 	if (oneline)
@@ -52,7 +52,7 @@ void processFile(char *filename)
  * @cmd: command
  * @value: value
 */
-void processCode(const char *cmd, const char *value)
+void processCode(const char *cmd, const char *value, int line_number)
 {
 
 	if (strcmp(cmd, "push") == 0)
@@ -60,12 +60,23 @@ void processCode(const char *cmd, const char *value)
 		int n = atoi(value);
 
 		/*printf("add %d to  stack\n", n);*/
+		if (n == 0)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
 		add2stack(&Store, n);
 	}
 	else if (strcmp(cmd, "pall") == 0)
 	{
 		/*printf("print stack\n");*/
 		print_stack(Store);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
+			exit(EXIT_FAILURE);
+
 	}
 }
 /**
@@ -78,7 +89,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		print("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	processFile(argv[1]);

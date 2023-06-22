@@ -16,7 +16,10 @@ char *_strdup(char *str)
 		size++;
 	array = malloc((1 + size) * sizeof(char));
 	if (!array)
-		return (NULL);
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 	do {
 		array[i] = str[i];
 	} while (i++ < size);
@@ -64,7 +67,10 @@ stack_t *add2stack(stack_t **head, const int n)
 	stack_t *new = malloc(sizeof(stack_t));
 
 	if (!new)
-		return (NULL);
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 	new->n = n;
 	new->next = *head;
 	new->prev = NULL;
