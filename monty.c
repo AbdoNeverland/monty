@@ -79,6 +79,9 @@ void processCode(const char *cmd, const char *value,
 	if (cmd[0] == 0)
 	{
 	}
+	else if (strcmp(cmd, "nop") == 0)
+	{
+	}
 	else if (strcmp(cmd, "push") == 0)
 	{
 		int n = atoi(value);
