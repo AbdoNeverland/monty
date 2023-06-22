@@ -44,4 +44,5 @@ stack_t *add2stack(stack_t **head, const int n);
 void processCode(const char *cmd, const char *value, int line_number, char **);
 size_t print_stack(const stack_t *h);
 void free_stack(stack_t *head);
+int is_number(const char *str);
 #endif
