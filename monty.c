@@ -42,7 +42,7 @@ void processFile(char *filename)
 			if (!oneline[i])
 				break;
 		}
-		processCode(tokens[0], tokens[1], line_number, &oneline);
+		processCode(tokens[0], tokens[1], line_number, &oneline, f);
 	}
 	fclose(f);
 	if (oneline)
@@ -73,7 +73,7 @@ int is_number(const char *str)
  * @oneline: to free
  */
 void processCode(const char *cmd, const char *value,
-				 int line_number, char **oneline)
+				 int line_number, char **oneline, FILE *f)
 {
 
 	if (strcmp(cmd, "push") == 0)
@@ -85,6 +85,7 @@ void processCode(const char *cmd, const char *value,
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			free(*oneline);
+			fclose(f);
 			exit(EXIT_FAILURE);
 		}
 		add2stack(&Store, n);
@@ -98,6 +99,7 @@ void processCode(const char *cmd, const char *value,
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
 		free(oneline);
+		fclose(f);
 		exit(EXIT_FAILURE);
 	}
 }
