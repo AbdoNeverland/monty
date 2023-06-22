@@ -12,6 +12,16 @@ void action_add(void)
 	printf("%d\n", n1 + n2);
 }
 /**
+ * action_swap - action
+ */
+void action_swap(void)
+{
+	int n1 = Store->n;
+
+	Store->n = Store->next->n;
+	Store->next->n = n1;
+}
+/**
  * processCode - process Code
  * @cmd: command
  * @value: value
@@ -29,8 +39,8 @@ void processCode(const char *cmd, const char *value,
 	else if (strcmp(cmd, "swap") == 0)
 	{
 		if (len_store(Store) < 2)
-			raise_error("can't add, stack too short", "", oneline, &f, line_number);
-		action_add();
+			raise_error("can't swap, stack too short", "", oneline, &f, line_number);
+		action_swap();
 	}
 	else if (strcmp(cmd, "add") == 0)
 	{
