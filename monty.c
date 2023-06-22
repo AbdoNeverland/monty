@@ -78,6 +78,13 @@ void raise_error(char **oneline, FILE **f)
 	free_stack(Store);
 	exit(EXIT_FAILURE);
 }
+void action_add()
+{
+	int n1 = remove_first(&Store);
+	int n2 = remove_first(&Store);
+
+	printf("%d\n", n1 + n2);
+}
 /**
  * processCode - process Code
  * @cmd: command
@@ -90,28 +97,29 @@ void raise_error(char **oneline, FILE **f)
 void processCode(const char *cmd, const char *value,
 				 int line_number, char **oneline, FILE *f)
 {
-	if (cmd[0] == 0)
+	if (cmd[0] == 0 || strcmp(cmd, "nop") == 0)
 	{
+	}
+	else if (strcmp(cmd, "add") == 0)
+	{
+		if (len_store(Store) < 2)
+			fprintf(stderr, "L%d>: can't add, stack too short\n", line_number),
+				raise_error(oneline, &f);
+		action_add();
 	}
 	else if (strcmp(cmd, "pop") == 0)
 	{
 		if (!Store)
-		{
-			fprintf(stderr, "L%d>: can't pop an empty stack\n", line_number);
+			fprintf(stderr, "L%d>: can't pop an empty stack\n", line_number),
 			raise_error(oneline, &f);
-		}
 		remove_first(&Store);
-		/*delete_at_index(&Store, 0);*/
 	}
 	else if (strcmp(cmd, "pint") == 0)
 	{
 		if (!Store)
 			fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number),
-			raise_error(oneline, &f);
+				raise_error(oneline, &f);
 		printf("%d\n", Store->n);
-	}
-	else if (strcmp(cmd, "nop") == 0)
-	{
 	}
 	else if (strcmp(cmd, "push") == 0)
 	{
@@ -120,14 +128,14 @@ void processCode(const char *cmd, const char *value,
 		/*printf("add %d to  stack\n", n);*/
 		if (!is_number(value) || value[0] == 0)
 			fprintf(stderr, "L%d: usage: push integer\n", line_number),
-			raise_error(oneline, &f);
+				raise_error(oneline, &f);
 		add2stack(&Store, n);
 	}
 	else if (strcmp(cmd, "pall") == 0)
 		print_stack(Store);
 	else
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd),
-		raise_error(oneline, &f);
+			raise_error(oneline, &f);
 }
 /**
  * main - main fct

@@ -3,17 +3,21 @@
 /**
  * remove_first -remove first
  * @head: head
+ * Return: int
 */
-void remove_first(stack_t **head)
+int remove_first(stack_t **head)
 {
 	stack_t *t;
+	int n = 0;
 
 if (*head)
 {
 t = (*head)->next;
+n = (*head)->n;
 free(*head);
 *head = t;
 }
+return (n);
 }
 /**
  *delete_at_index - delete node
@@ -53,4 +57,20 @@ int delete_at_index(stack_t **head, unsigned int index)
 		i++;
 	} while (1);
 	return (-1);
+}
+/**
+ * len_store - len of a list
+ *@h: list
+ * Return: int
+ */
+size_t len_store(stack_t *h)
+{
+	size_t n = 0;
+
+	while (h)
+	{
+		h = h->next;
+		n++;
+	}
+	return (n);
 }
