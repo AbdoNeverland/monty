@@ -71,6 +71,7 @@ int is_number(const char *str)
  * @line_number: line_number
  * @value: value
  * @oneline: to free
+ * @f: file
  */
 void processCode(const char *cmd, const char *value,
 				 int line_number, char **oneline, FILE *f)
