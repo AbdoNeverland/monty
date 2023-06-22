@@ -65,6 +65,21 @@ int is_number(const char *str)
 	return (1);
 }
 /**
+ * raise_error - raise error
+ * @error: error string
+ * @oneline: oneline
+ * @f: file
+ * @line_number: line number
+ */
+void raise_error(char **oneline, FILE *f)
+{
+	/*fprintf(stderr, "L%d>: %s\n", error, line_number);*/
+	if (*oneline)
+		free(*oneline);
+	fclose(f);
+	free_stack(Store);
+}
+/**
  * processCode - process Code
  * @cmd: command
  * @value: value
@@ -83,11 +98,8 @@ void processCode(const char *cmd, const char *value,
 	{
 		if (!Store)
 		{
-fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
-			if (*oneline)
-				free(*oneline);
-			fclose(f);
-			free_stack(Store);
+			fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
+			raise_error(oneline, f);
 		}
 		printf("%d\n", Store->n);
 	}
@@ -102,11 +114,7 @@ fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
 		if (!is_number(value) || value[0] == 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			if (*oneline)
-				free(*oneline);
-			fclose(f);
-			free_stack(Store);
-			exit(EXIT_FAILURE);
+			raise_error(oneline, f);
 		}
 		add2stack(&Store, n);
 	}
@@ -118,11 +126,7 @@ fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-		if (*oneline)
-			free(*oneline);
-		free_stack(Store);
-		fclose(f);
-		exit(EXIT_FAILURE);
+		raise_error(oneline, f);
 	}
 }
 /**
