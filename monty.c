@@ -93,13 +93,20 @@ void processCode(const char *cmd, const char *value,
 	if (cmd[0] == 0)
 	{
 	}
-	else if (strcmp(cmd, "pint") == 0)
+	else if (strcmp(cmd, "pop") == 0)
 	{
 		if (!Store)
 		{
 			fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
 			raise_error(oneline, &f);
 		}
+		printf("%d\n", Store->n);
+	}
+	else if (strcmp(cmd, "pint") == 0)
+	{
+		if (!Store)
+			fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number),
+			raise_error(oneline, &f);
 		printf("%d\n", Store->n);
 	}
 	else if (strcmp(cmd, "nop") == 0)
