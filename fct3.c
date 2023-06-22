@@ -64,12 +64,16 @@ int is_number(const char *str)
 }
 /**
  * raise_error - raise error
+ * @e1: error 1
+ * @e2: error 2
  * @oneline: oneline
  * @f: file
+ * @line_number: line number
  */
-void raise_error(char **oneline, FILE **f)
+void raise_error(const char *e1, const char *e2,
+char **oneline, FILE **f, int line_number)
 {
-	/*fprintf(stderr, "L%d>: %s\n", error, line_number);*/
+	fprintf(stderr, "L%d>: %s%s\n", line_number, e1, e2);
 	if (*oneline)
 		free(*oneline);
 	fclose(*f);

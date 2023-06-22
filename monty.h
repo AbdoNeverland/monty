@@ -49,6 +49,6 @@ void free_stack(stack_t *head);
 int delete_at_index(stack_t **head, unsigned int index);
 int remove_first(stack_t **head);
 size_t len_store(stack_t *h);
-void raise_error(char **oneline, FILE **f);
+void raise_error(const char *e1, const char *e2, char **oneline, FILE **f, int line_number);
 
 #endif
