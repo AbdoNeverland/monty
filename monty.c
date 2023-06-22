@@ -9,7 +9,7 @@ void processFile(char *filename)
 {
 	FILE *f;
 	char *oneline = NULL;
-	char tokens[10][20];
+	char tokens[1024][512];
 	size_t line_length = 0;
 	ssize_t line_length_readed;
 	unsigned long int i, j, k, line_number = 0;
