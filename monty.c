@@ -118,22 +118,15 @@ void processCode(const char *cmd, const char *value,
 
 		/*printf("add %d to  stack\n", n);*/
 		if (!is_number(value) || value[0] == 0)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number),
 			raise_error(oneline, &f);
-		}
 		add2stack(&Store, n);
 	}
 	else if (strcmp(cmd, "pall") == 0)
-	{
-		/*printf("print stack\n");*/
 		print_stack(Store);
-	}
 	else
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd),
 		raise_error(oneline, &f);
-	}
 }
 /**
  * main - main fct
