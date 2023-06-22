@@ -45,4 +45,6 @@ void processCode(const char *cmd, const char *value, int line_number, char **, F
 size_t print_stack(const stack_t *h);
 void free_stack(stack_t *head);
 int is_number(const char *str);
+int delete_at_index(stack_t **head, unsigned int index);
+void remove_first(stack_t **head);
 #endif

@@ -97,10 +97,11 @@ void processCode(const char *cmd, const char *value,
 	{
 		if (!Store)
 		{
-			fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
+			fprintf(stderr, "L%d>: can't pop an empty stack\n", line_number);
 			raise_error(oneline, &f);
 		}
-		printf("%d\n", Store->n);
+		remove_first(&Store);
+		/*delete_at_index(&Store, 0);*/
 	}
 	else if (strcmp(cmd, "pint") == 0)
 	{
