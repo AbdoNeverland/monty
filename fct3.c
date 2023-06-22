@@ -73,7 +73,7 @@ int is_number(const char *str)
 void raise_error(const char *e1, const char *e2,
 char **oneline, FILE **f, int line_number)
 {
-	fprintf(stderr, "L%d>: %s%s\n", line_number, e1, e2);
+	fprintf(stderr, "L%d: %s%s\n", line_number, e1, e2);
 	if (*oneline)
 		free(*oneline);
 	fclose(*f);
