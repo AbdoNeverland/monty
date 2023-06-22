@@ -41,23 +41,24 @@ void processFile(char *filename)
 			if (!oneline[i])
 				break;
 		}
-		/*for (ii = 0; i < sizeof(inst) / sizeof(instruction_t); i++)
-		{
-			if (strcmp(inst[ii].opcode, tokens[0]) == 0)
-			inst[ii].f(Store,line_number);
-		}*/
 		processCode(tokens[0], tokens[1]);
 	}
 	fclose(f);
 	if (oneline)
 		free(oneline);
 }
+/**
+ * processCode - process Code
+ * @cmd: command
+ * @value: value
+*/
 void processCode(const char *cmd, const char *value)
 {
-	
+
 	if (strcmp(cmd, "push") == 0)
 	{
 		int n = atoi(value);
+
 		printf("add %d to  stack\n", n);
 		add2stack(&Store, n);
 	}
@@ -72,15 +73,9 @@ void processCode(const char *cmd, const char *value)
  * @argc: nb arguments
  * @argv: arguments
  * Return: int
-
-void i_push(stack_t **stack, unsigned int line_number)
-{
-printf("push founded ::::: %d %d",7, line_number);
-}*/
+ */
 int main(int argc, char **argv)
 {
-	/*stack_t *Store = NULL;
-	instruction_t Instructions[] = {{"poooooow",i_push}};*/
 	if (argc != 2)
 	{
 		print("USAGE: monty file\n");
