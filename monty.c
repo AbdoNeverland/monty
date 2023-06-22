@@ -59,12 +59,12 @@ void processCode(const char *cmd, const char *value)
 	{
 		int n = atoi(value);
 
-		printf("add %d to  stack\n", n);
+		/*printf("add %d to  stack\n", n);*/
 		add2stack(&Store, n);
 	}
 	else if (strcmp(cmd, "pall") == 0)
 	{
-		printf("print stack\n");
+		/*printf("print stack\n");*/
 		print_stack(Store);
 	}
 }
