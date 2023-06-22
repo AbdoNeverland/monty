@@ -54,7 +54,7 @@ int getlineFromFile(char **line, int *len, int file_descriptor)
 	return (n);
 }
 /**
- * add_dnodeint - adds new node at the beginning
+ * add2stack - adds new node at the beginning
  *@head: the head of the list
  *@n: n
  *Return: number of nodes
@@ -72,4 +72,21 @@ stack_t *add2stack(stack_t **head, const int n)
 		(*head)->prev = new;
 	*head = new;
 	return (*head);
+}
+/**
+ * print_stack - print double list
+ *@h: list
+ * Return: int
+ */
+size_t print_stack(const stack_t *h)
+{
+	size_t n = 0;
+
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+		n++;
+	}
+	return (n);
 }

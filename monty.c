@@ -11,7 +11,7 @@ void processFile(char *filename)
 	char tokens[10][20];
 	size_t line_length = 0;
 	ssize_t line_length_readed;
-	long unsigned int i, j, k, line_number = 0;
+	unsigned long int i, j, k, line_number = 0;
 
 	f = fopen(filename, "r");
 	if (!f)
@@ -46,19 +46,25 @@ void processFile(char *filename)
 			if (strcmp(inst[ii].opcode, tokens[0]) == 0)
 			inst[ii].f(Store,line_number);
 		}*/
-		printf("%s<->%s#\n", tokens[0], tokens[1]);
-		processCode(tokens);
+		processCode(tokens[0], tokens[1]);
 	}
 	fclose(f);
 	if (oneline)
 		free(oneline);
 }
-void processCode(char **tokens)
+void processCode(const char *cmd, const char *value)
 {
-	int n = atoi(tokens[1]);
-	if (strcmp(tokens[0], "push") == 0)
+	
+	if (strcmp(cmd, "push") == 0)
 	{
+		int n = atoi(value);
+		printf("add %d to  stack\n", n);
 		add2stack(&Store, n);
+	}
+	else if (strcmp(cmd, "pall") == 0)
+	{
+		printf("print stack\n");
+		print_stack(Store);
 	}
 }
 /**
