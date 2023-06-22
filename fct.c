@@ -96,3 +96,18 @@ size_t print_stack(const stack_t *h)
 	}
 	return (n);
 }
+/**
+ * free_dlistint - free list
+ * @head: list
+ */
+void free_stack(stack_t *head)
+{
+	stack_t *t;
+
+	while (head)
+	{
+		t = head->next;
+		free(head);
+		head = t;
+	}
+}

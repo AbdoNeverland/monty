@@ -41,7 +41,7 @@ void processFile(char *filename)
 			if (!oneline[i])
 				break;
 		}
-		processCode(tokens[0], tokens[1], line_number, oneline);
+		processCode(tokens[0], tokens[1], line_number, &oneline);
 	}
 	fclose(f);
 	if (oneline)
@@ -94,5 +94,6 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	processFile(argv[1]);
+	free_stack(Store);
 	exit(EXIT_SUCCESS);
 }
