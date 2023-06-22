@@ -41,7 +41,7 @@ void processFile(char *filename)
 			if (!oneline[i])
 				break;
 		}
-		processCode(tokens[0], tokens[1], line_number);
+		processCode(tokens[0], tokens[1], line_number, oneline);
 	}
 	fclose(f);
 	if (oneline)
@@ -52,7 +52,7 @@ void processFile(char *filename)
  * @cmd: command
  * @value: value
 */
-void processCode(const char *cmd, const char *value, int line_number)
+void processCode(const char *cmd, const char *value, int line_number, char *oneline)
 {
 
 	if (strcmp(cmd, "push") == 0)
