@@ -47,15 +47,19 @@ void processFile(char *filename)
 			inst[ii].f(Store,line_number);
 		}*/
 		printf("%s<->%s#\n", tokens[0], tokens[1]);
-		int n = atoi(tokens[1]);
-		if (strcmp(tokens[0], "push") == 0)
-		{
-			add2stack(&Store, n);
-		}
+		processCode(tokens);
 	}
 	fclose(f);
 	if (oneline)
 		free(oneline);
+}
+void processCode(char **tokens)
+{
+	int n = atoi(tokens[1]);
+	if (strcmp(tokens[0], "push") == 0)
+	{
+		add2stack(&Store, n);
+	}
 }
 /**
  * main - main fct
