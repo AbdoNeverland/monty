@@ -1,8 +1,13 @@
-#ifndef MONTY_H
-#define MONTY_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+
+#ifndef MONTY_H
+#define MONTY_H
+
+#define print(str) write(STDOUT_FILENO, str, strlen(str))
+#define raise(str) write(STDERR_FILENO, str, strlen(str))
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -33,4 +38,9 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+char *_strdup(char *str);
+int getlineFromFile(char **line, int *len, int file_descriptor);
+void free_array(char **array);
+char **parse_line(char *str, long int *nb_parts);
+stack_t *add2stack(stack_t **head, const int n);
 #endif
